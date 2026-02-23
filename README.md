@@ -7,8 +7,6 @@
 MPyC is a developer-friendly wrapper around the official MicroPython cross compiler.
 It helps you install, manage, and use `mpy-cross` without remembering complex commands or paths.
 
----
-
 ## ✨ Why MPyC?
 
 Working with `mpy-cross` directly can be repetitive:
@@ -20,8 +18,6 @@ Working with `mpy-cross` directly can be repetitive:
 
 MPyC streamlines all of that into a clean, modern CLI.
 
----
-
 ## 🚀 Features
 
 * ⚡ One-command install for `mpy-cross`
@@ -30,8 +26,6 @@ MPyC streamlines all of that into a clean, modern CLI.
 * 🩺 `doctor` command to validate setup
 * 🎨 Clean help output and friendly UX
 * 🦀 Built with Rust for speed and reliability
-
----
 
 ## 📦 Installation
 
@@ -54,8 +48,6 @@ Binary will be located at:
 ```
 target/release/mpyc
 ```
-
----
 
 ## 📖 Usage
 
@@ -89,8 +81,6 @@ mpyc build main.py -o dist
 mpyc doctor
 ```
 
----
-
 ## 🛠 Example Workflow
 
 ```bash
@@ -99,8 +89,6 @@ mpyc build src/app.py -o firmware/
 ```
 
 That’s it. No manual binary handling. No PATH headaches.
-
----
 
 ## 🧠 Philosophy
 
@@ -112,8 +100,6 @@ MPyC follows three principles:
 
 It doesn’t replace `mpy-cross` — it enhances it.
 
----
-
 ## 🔮 Roadmap
 
 * Interactive TUI mode
@@ -122,8 +108,6 @@ It doesn’t replace `mpy-cross` — it enhances it.
 * Multi-project support
 * Pre-build validation
 
----
-
 ## 🤝 Contributing
 
 Contributions are welcome.
@@ -131,8 +115,6 @@ Contributions are welcome.
 1. Fork the repo
 2. Create a feature branch
 3. Open a pull request
-
----
 
 ## 📜 License
 
