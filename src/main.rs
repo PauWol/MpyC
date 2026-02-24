@@ -53,10 +53,6 @@ enum Commands {
         #[arg(short, long)]
         output: String,
 
-        /// Optional file input
-        #[arg(short, long)]
-        file: Option<String>,
-
         /// Some flags
         #[arg(long, action = clap::ArgAction::SetTrue)]
         verbose: bool,
@@ -80,12 +76,10 @@ fn main() {
         Commands::Build {
             input,
             output,
-            file,
             verbose,
         } => {
             println!(
-                "Build command: input={input}, output={output}, file={:?}, verbose={verbose}",
-                file
+                "Build command: input={input}, output={output}, verbose={verbose}",
             );
         }
     }
