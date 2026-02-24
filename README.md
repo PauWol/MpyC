@@ -1,6 +1,10 @@
-# ⚡ MPyC
+<div align="center">
+  <img src="./MpyC.png" alt="MpyC-Logo" width="45" height="45" style="display: inline-block; vertical-align: middle; margin-right: 10px;">
+  <h1 style="display: inline-block; vertical-align: middle;">MpyC</h1>
+</div>
 
-### MicroPython Cross Compiler Manager
+
+### ⚡ MicroPython Cross Compiler Manager
 
 > A fast, minimal Rust CLI to install, manage, and simplify `mpy-cross`.
 
