@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./MpyC.png" alt="MpyC-Logo" width="45" height="45" style="display: inline-block; vertical-align: middle; margin-right: 10px;">
+  <img src="./MpyC.png" alt="MpyC-Logo" width="50" height="50" style="display: inline-block; vertical-align: middle; margin-right: 10px;">
   <h1 style="display: inline-block; vertical-align: middle;">MpyC</h1>
 </div>
 
