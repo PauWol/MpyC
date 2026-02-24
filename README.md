@@ -1,15 +1,13 @@
 <div align="center">
-  <img src="./MpyC.png" alt="MpyC-Logo" width="45" height="45" style="display: inline-block; vertical-align: middle; margin-right: 10px;">
+  <img src="./MpyC.png" alt="MpyC-Logo" width="100" height="100" style="display: inline-block; vertical-align: middle; margin-right: 10px;">
   <h1 style="display: inline-block; vertical-align: middle;">MpyC</h1>
 </div>
-
 
 ### ⚡ MicroPython Cross Compiler Manager
 
 > A fast, minimal Rust CLI to install, manage, and simplify `mpy-cross`.
 
-MPyC is a developer-friendly wrapper around the official MicroPython cross compiler.
-It helps you install, manage, and use `mpy-cross` without remembering complex commands or paths.
+MPyC is a developer-friendly wrapper around the official MicroPython cross compiler. It helps you install, manage, and use `mpy-cross` without remembering complex commands or paths.
 
 ## ✨ Why MPyC?
 
@@ -24,10 +22,10 @@ MPyC streamlines all of that into a clean, modern CLI.
 
 ## 🚀 Features
 
-* ⚡ One-command install for `mpy-cross`
-* 🔄 Version management
-* 📦 Simple `build` wrapper
-* 🩺 `doctor` command to validate setup
+* ⚡ One-command install for `mpy-cross` (`mpyc setup`)
+* 🔄 Version management (`mpyc list` and `mpyc use`)
+* 📦 Build wrapper for files and folders (`mpyc build`)
+* 🩺 `doctor` command to validate your setup (`mpyc doctor`)
 * 🎨 Clean help output and friendly UX
 * 🦀 Built with Rust for speed and reliability
 
@@ -55,28 +53,30 @@ target/release/mpyc
 
 ## 📖 Usage
 
-### Install mpy-cross
+### Show help
 
 ```bash
-mpyc install
+mpyc --help
 ```
 
-### Build a Python file
+### Setup MpyC for your system
 
 ```bash
-mpyc build main.py
+mpyc setup
 ```
 
-Output:
+Installs `uv` and prepares the environment.
 
-```
-main.mpy
-```
-
-### Specify output directory
+### List installed and available versions
 
 ```bash
-mpyc build main.py -o dist
+mpyc list
+```
+
+### Use a specific version
+
+```bash
+mpyc use 1.17
 ```
 
 ### Check system status
@@ -85,14 +85,26 @@ mpyc build main.py -o dist
 mpyc doctor
 ```
 
+### Build a Python file or folder
+
+```bash
+mpyc build -i src -o firmware
+```
+
+Enable verbose output:
+
+```bash
+mpyc build -i src -o firmware --verbose
+```
+
 ## 🛠 Example Workflow
 
 ```bash
-mpyc install
-mpyc build src/app.py -o firmware/
+mpyc setup
+mpyc build -i src -o firmware --verbose
 ```
 
-That’s it. No manual binary handling. No PATH headaches.
+No manual binary handling. No PATH headaches.
 
 ## 🧠 Philosophy
 
