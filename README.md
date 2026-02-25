@@ -67,13 +67,9 @@ mpyc setup
 
 Installs `uv` and prepares the environment.
 
-### List installed and available versions
-
-```bash
-mpyc list
-```
-
 ### Use a specific version
+
+Also lists available,active and installed versions
 
 ```bash
 mpyc use 1.17
