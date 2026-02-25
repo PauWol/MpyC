@@ -1,9 +1,11 @@
+use pep440::Version;
 use reqwest::blocking::get;
 use serde_json::Value;
-use pep440::Version;
+
+use crate::util::config::Config;
+use crate::util::path::get_versions_dir;
 
 const MPY_CROSS_PYPI_URL: &str = "https://pypi.org/pypi/mpy-cross/json";
-
 
 /// Checks if a specific version of mpy-cross exists on PyPI
 pub fn mpy_cross_version_exists(version: &str) -> bool {
@@ -18,7 +20,6 @@ pub fn mpy_cross_version_exists(version: &str) -> bool {
     }
 }
 
-
 /// Gets a list of all available versions of mpy-cross from PyPI
 fn get_all_mpy_cross_versions() -> Vec<String> {
     let response = get(MPY_CROSS_PYPI_URL).expect("Failed to fetch PyPI mpy-cross JSON");
@@ -32,16 +33,28 @@ fn get_all_mpy_cross_versions() -> Vec<String> {
     }
 }
 
+/// Gets a list of all installed versions of mpy-crosss
 fn get_installed_mpy_cross_versions() -> Vec<String> {
-    // This function should return a list of installed mpy-cross versions
-    // For now, it returns an empty vector as a placeholder
-    vec![]
+    let mut versions = Vec::new();
+    let versions_dir = get_versions_dir();
+    for entry in std::fs::read_dir(versions_dir).unwrap() {
+        let version = entry.unwrap().file_name().to_str().unwrap().to_string();
+        if mpy_cross_version_exists(&version) {
+            versions.push(version);
+        }
+    }
+    versions
 }
 
 fn get_active_mpy_cross_version() -> Option<String> {
     // This function should return the currently active mpy-cross version
     // For now, it returns None as a placeholder
-    None
+    let config = Config::load().expect("Failed to load config");
+    if config.is_valid() {
+        Some(config.active_version)
+    } else {
+        None
+    }
 }
 
 /// Merges the list of available versions with the list of installed versions and the active version
@@ -68,11 +81,7 @@ pub fn merge_available_and_installed_versions() -> Vec<(String, bool, bool)> {
         })
         .collect();
 
-    merged.sort_by(|a, b| {
-        b.2.cmp(&a.2)
-            .then(b.1.cmp(&a.1))
-            .then(b.3.cmp(&a.3))
-    });
+    merged.sort_by(|a, b| b.2.cmp(&a.2).then(b.1.cmp(&a.1)).then(b.3.cmp(&a.3)));
 
     merged.into_iter().map(|(v, i, a, _)| (v, i, a)).collect()
 }

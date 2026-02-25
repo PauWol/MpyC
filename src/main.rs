@@ -1,7 +1,7 @@
 mod doctor;
+mod use_version;
 mod util;
 mod versions;
-mod use_version;
 
 use doctor::doctor;
 use use_version::use_version;
@@ -68,17 +68,8 @@ impl Args {
 
 #[derive(Subcommand, Debug)]
 enum Commands {
-    /// Setup MpyC for your system
-    Setup,
-
-    /// List installed and available versions
-    List,
-
     /// Select and if not installed, install a version to use
     Use,
-
-    /// Run some checks to make sure everything is working
-    Doctor,
 
     /// Build ("compile") a project,a folder or a single file
     Build {
@@ -94,6 +85,12 @@ enum Commands {
         #[arg(long, action = clap::ArgAction::SetTrue)]
         verbose: bool,
     },
+
+    /// Setup MpyC for your system
+    Setup,
+
+    /// Run some checks to make sure everything is working
+    Doctor,
 }
 
 fn main() {
@@ -108,7 +105,6 @@ fn main() {
     match args.command.unwrap() {
         Commands::Doctor => doctor(),
         Commands::Setup => println!("Setup command not implemented yet"),
-        Commands::List => println!("List command not implemented yet"),
         Commands::Use => use_version(),
         Commands::Build {
             input,
