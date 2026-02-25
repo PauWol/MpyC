@@ -1,5 +1,5 @@
 const DIR_NAME: &str = ".mpyc";
-const VERSIONS_DIR_NAME: &str = "/versions";
+const VERSIONS_DIR_NAME: &str = "versions";
 
 const CONFIG_FILE_NAME: &str = "config.toml";
 

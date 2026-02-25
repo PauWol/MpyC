@@ -1,13 +1,39 @@
 mod doctor;
 mod util;
+mod versions;
+mod use_version;
 
 use doctor::doctor;
+use use_version::use_version;
 
+use clap::builder::Styles;
+use clap::builder::styling::{AnsiColor, Effects};
 use clap::{CommandFactory, Parser, Subcommand};
 
-/// Simple program to greet a person
+fn clap_styles() -> Styles {
+    Styles::styled()
+        // Headers like "USAGE", "COMMANDS"
+        .header(AnsiColor::BrightYellow.on_default().effects(Effects::BOLD))
+        // Literal flags like --help
+        .literal(AnsiColor::BrightBlue.on_default().effects(Effects::BOLD))
+        // Placeholders like <INPUT>
+        .placeholder(
+            AnsiColor::BrightMagenta
+                .on_default()
+                .effects(Effects::ITALIC),
+        )
+        // Usage line
+        .usage(AnsiColor::BrightYellow.on_default().effects(Effects::BOLD))
+}
+
 #[derive(Parser, Debug)]
-#[command(version, about, long_about = None)]
+#[command(
+    version,
+    about = "MicroPython Cross Compiler · Manager",
+    long_about = None,
+    disable_help_subcommand = true,
+    styles = clap_styles(),
+)]
 struct Args {
     #[command(subcommand)]
     command: Option<Commands>,
@@ -19,7 +45,18 @@ impl Args {
     }
 
     fn banner(&self) {
-        println!("Welcome to the Rust CLI!");
+        println!(
+            r#"
+            ███╗   ███╗██████╗ ██╗   ██╗ ██████╗
+            ████╗ ████║██╔══██╗╚██╗ ██╔╝██╔════╝
+            ██╔████╔██║██████╔╝ ╚████╔╝ ██║     
+            ██║╚██╔╝██║██╔═══╝   ╚██╔╝  ██║     
+            ██║ ╚═╝ ██║██║        ██║   ╚██████╗
+            ╚═╝     ╚═╝╚═╝        ╚═╝    ╚═════╝
+
+
+            "#
+        );
     }
 
     fn print_long_help(&self) {
@@ -72,15 +109,13 @@ fn main() {
         Commands::Doctor => doctor(),
         Commands::Setup => println!("Setup command not implemented yet"),
         Commands::List => println!("List command not implemented yet"),
-        Commands::Use => println!("Use command not implemented yet"),
+        Commands::Use => use_version(),
         Commands::Build {
             input,
             output,
             verbose,
         } => {
-            println!(
-                "Build command: input={input}, output={output}, verbose={verbose}",
-            );
+            println!("Build command: input={input}, output={output}, verbose={verbose}",);
         }
     }
 }
